@@ -134,3 +134,26 @@ if (reviewsTrack) {
   reviewsTrack.addEventListener('pointercancel', endDrag);
   reviewsTrack.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); move(e.key === 'ArrowRight' ? 1 : -1); } });
 }
+const videoGrid = document.querySelector('.video-grid');
+if (videoGrid) {
+  let playing = null;
+  const stop = () => {
+    if (!playing) return;
+    playing.el.replaceWith(playing.card);
+    playing = null;
+  };
+  const play = card => {
+    stop();
+    const box = document.createElement('div');
+    box.className = card.className + ' is-playing';
+    box.innerHTML = `<iframe src="${card.dataset.video}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock" allowfullscreen title="${card.querySelector('b').textContent}"></iframe><button type="button" class="video-full" aria-label="На весь экран">⤢</button><button type="button" class="video-stop" aria-label="Закрыть видео">×</button>`;
+    box.querySelector('.video-stop').addEventListener('click', stop);
+    box.querySelector('.video-full').addEventListener('click', () => {
+      const frame = box.querySelector('iframe');
+      (frame.requestFullscreen || frame.webkitRequestFullscreen || (() => {})).call(frame);
+    });
+    card.replaceWith(box);
+    playing = { el: box, card };
+  };
+  videoGrid.querySelectorAll('[data-video]').forEach(card => card.addEventListener('click', () => play(card)));
+}
