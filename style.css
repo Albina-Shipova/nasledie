@@ -111,7 +111,7 @@ h2,.feature h2{letter-spacing:-.2rem}.about-cta h2{letter-spacing:-.1rem}.contac
 .benefits article:before{content:counter(ben,decimal-leading-zero);counter-increment:ben;position:absolute;right:10rem;top:8rem;font:300 7rem Manrope,sans-serif;color:#b4a797}
 .benefits{counter-reset:ben}
 .benefits .icon{width:16rem;height:16rem;padding:6rem;box-sizing:content-box;border-radius:50%;background:#ece4d9;color:#5a4a3b;margin-bottom:10rem;transition:background .25s,color .25s}
-.benefits h3{font-family:Georgia,serif;font-size:10.5rem;line-height:1.15;letter-spacing:-.1rem}
+.benefits h3{font-size:10.5rem;line-height:1.15;letter-spacing:-.1rem}
 .benefits article:hover{background:#403427;color:#f6efe5}
 .benefits article:hover p{color:#d8cdbd}
 .benefits article:hover .icon{background:#5a4a3b;color:#f6efe5}
@@ -124,7 +124,7 @@ h2,.feature h2{letter-spacing:-.2rem}.about-cta h2{letter-spacing:-.1rem}.contac
 .process .process-controls button:hover{background:#4a3a2c}
 .steps{gap:6rem}
 .steps article{background:#3b2e23;min-height:80rem;padding:10rem 10rem 22rem;border-top:1.2rem solid transparent}
-.steps article>span{display:block;font:300 22rem/1 Georgia,serif;color:#a88d6f;letter-spacing:-.5rem}
+.steps article>span{display:block;font:200 22rem/1 Manrope,sans-serif;color:#a88d6f;letter-spacing:-.5rem}
 .steps h3{margin-top:9rem;color:#f6efe5}
 .steps p{color:#c9b8a3!important}
 .steps article:after{color:#a88d6f}
@@ -142,7 +142,7 @@ h2,.feature h2{letter-spacing:-.2rem}.about-cta h2{letter-spacing:-.1rem}.contac
 .lg2:before,.tb2 .tb-fill{background:#403427}
 .terms-rows{display:flex;flex-direction:column;gap:5rem}
 .terms-row{display:grid;grid-template-columns:110rem 1fr;gap:12rem;align-items:center;background:#faf7f2;border-radius:8rem;padding:9rem 12rem}
-.tr-name{font-family:Georgia,serif;font-size:10rem}
+.tr-name{font-size:10rem}
 .tr-name small{display:block;font:6.5rem Manrope,sans-serif;color:#9a8e80;margin-top:2rem}
 .tr-bars{display:flex;flex-direction:column;gap:3rem;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - .5rem),#e3d9cc calc(25% - .5rem) 25%)}
 .tb{position:relative;height:9rem}
@@ -155,7 +155,7 @@ h2,.feature h2{letter-spacing:-.2rem}.about-cta h2{letter-spacing:-.1rem}.contac
 .team{position:relative;background:#2f241b url(assets/projects/real-05.webp) center/cover;color:#f6efe5;grid-template-columns:1fr 1.4fr!important;align-items:center;gap:24rem!important;padding:26rem 22rem}
 .team:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#1f1711f2 0%,#1f1711d9 45%,#1f1711a6 100%)}
 .team>*{position:relative}
-.team h2{font-family:Georgia,serif;font-weight:400;font-size:17rem}
+.team h2{font-weight:400;font-size:17rem}
 .team p{color:#d8cdbd!important}
 .specialties{grid-template-columns:repeat(4,auto)!important;justify-content:start;gap:6rem!important}
 .specialties span{border:.6rem solid #8b7a66;border-radius:30rem;padding:5rem 11rem;font-size:7.5rem;color:#f6efe5;background:#2f241b80;transition:background .2s}
@@ -188,3 +188,32 @@ details.service .small-arrow{position:absolute;top:-150rem;right:10rem;width:20r
 details.service[open] summary{border-radius:10rem 10rem 0 0}
 details.service ul{padding:11rem 12rem 12rem 24rem}
 details.service .small-arrow{top:auto;bottom:12rem;right:12rem}
+
+/* Почему выбирают нас — крупные цифры без иконок */
+.about{padding:20rem 22rem}
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:14rem;counter-reset:none}
+.benefits article,.benefits article:last-child,.benefits article:nth-child(3n),.benefits article:nth-child(3n+1){background:none;border-radius:0;padding:14rem 14rem 16rem;border:0;border-top:.6rem solid #d6cbbb;overflow:visible}
+.benefits article:nth-child(3n+2),.benefits article:nth-child(3n+3){border-left:.6rem solid #d6cbbb}
+.benefits article:before{content:none}
+.benefits article:hover{background:none;color:inherit}
+.benefits article:hover p{color:#6f655a}
+.benefits .num{display:block;font-weight:200;font-size:34rem;line-height:1;letter-spacing:-1.5rem;color:#403427;transition:color .25s}
+.benefits .num small{font-size:11rem;letter-spacing:0;font-weight:300;margin-left:3rem;color:#8b7258}
+.benefits h3{font-size:9rem;font-weight:400;margin-top:8rem;line-height:1.2}
+.benefits p{margin-top:4rem}
+.benefits article:hover .num{color:#a88d6f}
+.benefits .num small.pre{margin:0 4rem 0 0}
+
+/* Контакты: CTA + данные + карта */
+.contact{grid-template-columns:1.25fr .8fr 1.35fr;gap:22rem;align-items:stretch;padding:24rem 22rem}
+.contact-cta{display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.contact-info{justify-content:center;border-left:.6rem solid #5e4d3d;padding-left:20rem}
+.ci-label{font-size:6.5rem;letter-spacing:1.6rem;text-transform:uppercase;color:#b9a68d;margin-bottom:4rem}
+.ci-label+p,.contact-info p{margin-top:0}
+.contact-info .phone{margin-bottom:14rem}
+.contact-info p{font-size:10rem;line-height:1.35;font-weight:300}
+.contact-map{position:relative;min-height:190rem;border-radius:10rem;overflow:hidden;background:#2f241b}
+.contact-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:sepia(.25) saturate(.85)}
+.contact{grid-template-columns:1.15fr 1fr 1.3fr}
+.contact-info .phone{font-size:15rem;white-space:nowrap}
+.contact-info .map-link{white-space:nowrap}
