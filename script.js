@@ -18,7 +18,8 @@ lightbox.querySelector('.close').addEventListener('click', () => lightbox.close(
 lightbox.addEventListener('click', event => { if (event.target === lightbox) lightbox.close(); });
 const stageButtons = document.querySelectorAll('[data-step]');
 const stages = [...document.querySelectorAll('.steps article')];
-let selectedStage = -1;
+let selectedStage = 0;
+stages[0]?.classList.add('active');
 stageButtons.forEach(button => button.addEventListener('click', () => {
   selectedStage = (selectedStage + Number(button.dataset.step) + stages.length) % stages.length;
   stages.forEach((stage, index) => stage.classList.toggle('active', index === selectedStage));
@@ -36,11 +37,17 @@ if (viewer) {
   const pad = n => String(n).padStart(2, '0');
   const showPhoto = index => {
     current = (index + photos.length) % photos.length;
-    mainImage.src = photos[current];
+    mainImage.src = innerWidth < 700 ? photos[current].replace('projects/', 'projects/thumb/') : photos[current];
     mainImage.alt = `${title} — фото ${current + 1}`;
     counter.textContent = `${pad(current + 1)} / ${pad(photos.length)}`;
     thumbs.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-current', String(i === current)));
-    thumbs.children[current]?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    const activeThumb = thumbs.children[current];
+    if (activeThumb) {
+      const strip = thumbs.getBoundingClientRect();
+      const thumb = activeThumb.getBoundingClientRect();
+      if (thumb.left < strip.left) thumbs.scrollLeft += thumb.left - strip.left;
+      else if (thumb.right > strip.right) thumbs.scrollLeft += thumb.right - strip.right;
+    }
     if (lightbox.open) { lbImage.src = photos[current]; lbImage.alt = mainImage.alt; }
   };
   const selectProject = button => {
@@ -48,7 +55,7 @@ if (viewer) {
     photos = button.dataset.photos.split('|');
     title = button.querySelector('b').textContent;
     tag.textContent = button.dataset.tag;
-    thumbs.innerHTML = photos.map((src, i) => `<button type="button" aria-label="Фото ${i + 1}"><img src="${src}" alt="" loading="lazy"></button>`).join('');
+    thumbs.innerHTML = photos.map((src, i) => `<button type="button" aria-label="Фото ${i + 1}"><img src="${src.replace('projects/', 'projects/thumb/')}" alt="" loading="lazy"></button>`).join('');
     thumbs.querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => showPhoto(i)));
     showPhoto(0);
   };
@@ -156,4 +163,48 @@ if (videoGrid) {
     playing = { el: box, card };
   };
   videoGrid.querySelectorAll('[data-video]').forEach(card => card.addEventListener('click', () => play(card)));
+}
+
+
+/* Прелоадер: 1,8 с заполнения + 0,2 с исчезновения. */
+(() => {
+  const loader = document.querySelector('.preloader');
+  const done = () => document.body.classList.remove('is-loading');
+  if (!loader || matchMedia('(prefers-reduced-motion: reduce)').matches || getComputedStyle(loader).visibility === 'hidden') {
+    done();
+    return;
+  }
+  loader.addEventListener('animationend', event => {
+    if (event.target === loader && event.animationName === 'plExit') done();
+  });
+})();
+
+/* Появление при прокрутке */
+(() => {
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const groups = ['.benefits article', 'details.service', '.project-list li', '.review', '.video-card', '.steps article', '.terms-row', '.specialties span', '.faq-list details', '.sr-tile', '.chips span', '.contact > *'];
+  const items = [];
+  document.querySelectorAll('main > section:not(.hero)').forEach(sec => { sec.classList.add('rv'); items.push(sec); });
+  groups.forEach(sel => {
+    const parents = new Map();
+    document.querySelectorAll(sel).forEach(el => {
+      const p = el.parentElement, n = parents.get(p) || 0;
+      parents.set(p, n + 1);
+      el.classList.add('rv', 'rv-item');
+      el.style.setProperty('--d', 250 + Math.min(n, 8) * 120 + 'ms');
+      items.push(el);
+    });
+  });
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting || e.boundingClientRect.top < 0) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { rootMargin: '0px 0px -12% 0px', threshold: .12 });
+  document.body.offsetHeight;
+  items.forEach(el => { el.classList.add('rv-ready'); io.observe(el); });
+  document.querySelector('.hero')?.classList.add('hero-anim');
+})();
+
+const siteHeader = document.querySelector('.header');
+if (siteHeader) {
+  const onScroll = () => siteHeader.classList.toggle('is-scrolled', scrollY > 10);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
 }
