@@ -217,3 +217,39 @@ details.service .small-arrow{top:auto;bottom:12rem;right:12rem}
 .contact{grid-template-columns:1.15fr 1fr 1.3fr}
 .contact-info .phone{font-size:15rem;white-space:nowrap}
 .contact-info .map-link{white-space:nowrap}
+
+/* ===== Стекло: общие ===== */
+.glass{background:rgba(250,245,238,.14);-webkit-backdrop-filter:blur(14px) saturate(1.1);backdrop-filter:blur(14px) saturate(1.1);border:.6rem solid rgba(255,255,255,.22);border-radius:10rem}
+
+/* Почему выбирают нас */
+.why{position:relative;margin-top:16rem;display:grid;grid-template-columns:.85fr 2fr;gap:18rem;padding:24rem 22rem;color:#f6efe5;background:#2f241b;isolation:isolate}
+.why-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.why:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#1f1711eb 0%,#1f1711b3 40%,#1f171166 100%)}
+.why-head{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:14rem}
+.why-head h2{font-size:22rem;font-weight:300;line-height:1.05;letter-spacing:-.4rem}
+.why-head p{font-size:8rem;line-height:1.5;color:#d8cdbd;max-width:150rem;margin-top:-30rem}
+.why .benefits{margin:0;grid-template-columns:repeat(3,1fr);gap:6rem}
+.why .benefits article,.why .benefits article:last-child,.why .benefits article:nth-child(3n),.why .benefits article:nth-child(3n+1),.why .benefits article:nth-child(3n+2),.why .benefits article:nth-child(3n+3){background:rgba(250,245,238,.13);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:.6rem solid rgba(255,255,255,.2);border-radius:10rem;padding:12rem 12rem 13rem;transition:background .25s}
+.why .benefits article:hover{background:rgba(250,245,238,.22)}
+.why .benefits .num{color:#f6efe5;font-size:30rem}
+.why .benefits .num small{color:#d9c3a5}
+.why .benefits h3{color:#f6efe5}
+.why .benefits p,.why .benefits article:hover p{color:#d2c5b4}
+.why .benefits article:hover .num{color:#e7cfa9}
+.why .benefits article:nth-child(-n+2){background:rgba(244,236,225,.9);border-color:transparent;color:#2f241b}
+.why .benefits article:nth-child(-n+2) .num,.why .benefits article:nth-child(-n+2) h3{color:#2f241b}
+.why .benefits article:nth-child(-n+2) .num small{color:#8b7258}
+.why .benefits article:nth-child(-n+2) p{color:#6f655a}
+
+/* Услуги: фоновое фото + стеклянная вводная */
+.services-glass{position:relative;isolation:isolate;background:#d9cfc2}
+.sg-bg{position:absolute;inset:-20rem;width:calc(100% + 40rem);height:calc(100% + 40rem);object-fit:cover;filter:blur(18px) saturate(.9);z-index:-2}
+.services-glass:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#f4efe8b3 0%,#ece6dfcc 100%)}
+.sg-intro{display:grid;grid-template-columns:1.1fr 1fr;gap:20rem;align-items:end;padding:16rem 16rem 15rem;margin-bottom:10rem;background:rgba(255,255,255,.4);border-color:rgba(255,255,255,.6)}
+.sg-intro h2{margin-bottom:8rem}
+.sg-intro p{font-size:8.5rem;line-height:1.5;color:#5a4f45;max-width:230rem}
+.sg-side{display:flex;flex-direction:column;align-items:flex-end;gap:10rem}
+.chips{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:5rem}
+.chips span{font-size:7rem;padding:4rem 9rem;border-radius:20rem;background:rgba(255,255,255,.55);border:.5rem solid rgba(64,52,39,.15);color:#403427}
+.sg-side .button.light{background:#2f241b;color:#f6efe5}
+.services-glass .price-note{color:#5a4f45}
